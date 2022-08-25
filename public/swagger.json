@@ -1,0 +1,347 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"UserDataEntity": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"first_name": {
+						"type": "string"
+					},
+					"last_name": {
+						"type": "string"
+					},
+					"mob_no": {
+						"type": "string"
+					},
+					"dob": {
+						"type": "string"
+					},
+					"age": {
+						"type": "string"
+					},
+					"weight": {
+						"type": "number",
+						"format": "double"
+					},
+					"height": {
+						"type": "string"
+					},
+					"bmi_ratio": {
+						"type": "number",
+						"format": "double"
+					},
+					"country_origin": {
+						"type": "string"
+					},
+					"is_diabetic": {
+						"type": "boolean"
+					},
+					"has_cardiac_issues": {
+						"type": "boolean"
+					},
+					"has_bp_issue": {
+						"type": "boolean"
+					},
+					"user": {
+						"$ref": "#/components/schemas/UserCredentials"
+					}
+				},
+				"required": [
+					"id",
+					"first_name",
+					"last_name",
+					"mob_no",
+					"dob",
+					"age",
+					"weight",
+					"height",
+					"bmi_ratio",
+					"country_origin",
+					"is_diabetic",
+					"has_cardiac_issues",
+					"has_bp_issue",
+					"user"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserCredentials": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"email": {
+						"type": "string"
+					},
+					"hashPwd": {
+						"type": "string"
+					},
+					"salt": {
+						"type": "string"
+					},
+					"userInfo": {
+						"$ref": "#/components/schemas/UserDataEntity"
+					},
+					"userFamilyInfo": {
+						"$ref": "#/components/schemas/UserFamilyDataEntity"
+					}
+				},
+				"required": [
+					"id",
+					"email",
+					"hashPwd",
+					"salt",
+					"userInfo",
+					"userFamilyInfo"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserFamilyDataEntity": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"father_name": {
+						"type": "string"
+					},
+					"father_age": {
+						"type": "number",
+						"format": "double"
+					},
+					"father_origin": {
+						"type": "string"
+					},
+					"mother_name": {
+						"type": "string"
+					},
+					"mother_age": {
+						"type": "number",
+						"format": "double"
+					},
+					"mother_origin": {
+						"type": "string"
+					},
+					"isParentDiabetic": {
+						"type": "boolean"
+					},
+					"parentHasCardiacIssue": {
+						"type": "boolean"
+					},
+					"parentHasBPIssue": {
+						"type": "boolean"
+					},
+					"user": {
+						"$ref": "#/components/schemas/UserCredentials"
+					}
+				},
+				"required": [
+					"id",
+					"father_name",
+					"father_age",
+					"father_origin",
+					"mother_name",
+					"mother_age",
+					"mother_origin",
+					"isParentDiabetic",
+					"parentHasCardiacIssue",
+					"parentHasBPIssue",
+					"user"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ObjectLiteral": {
+				"description": "Interface of the simple literal object with any string keys.",
+				"properties": {},
+				"type": "object",
+				"additionalProperties": {}
+			},
+			"UpdateResult": {
+				"description": "Result object returned by UpdateQueryBuilder execution.",
+				"properties": {
+					"raw": {
+						"description": "Raw SQL result returned by executed query."
+					},
+					"affected": {
+						"type": "number",
+						"format": "double",
+						"description": "Number of affected rows/documents\nNot all drivers support this"
+					},
+					"generatedMaps": {
+						"items": {
+							"$ref": "#/components/schemas/ObjectLiteral"
+						},
+						"type": "array",
+						"description": "Generated values returned by a database.\nHas entity-like structure (not just column database name and values)."
+					}
+				},
+				"required": [
+					"raw",
+					"generatedMaps"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DeleteResult": {
+				"description": "Result object returned by DeleteQueryBuilder execution.",
+				"properties": {
+					"raw": {
+						"description": "Raw SQL result returned by executed query."
+					},
+					"affected": {
+						"type": "number",
+						"format": "double",
+						"nullable": true,
+						"description": "Number of affected rows/documents\nNot all drivers support this"
+					}
+				},
+				"required": [
+					"raw"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "hospital",
+		"version": "0.0.1",
+		"description": "Awesome project developed with TypeORM.",
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/user": {
+			"get": {
+				"operationId": "GetUserDetails",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/UserDataEntity"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateUserDetails",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"jwt": [
+							"user"
+						]
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserDataEntity"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/user/{id}": {
+			"put": {
+				"operationId": "UpdateUserDetails",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UpdateResult"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteUserDetails",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteResult"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
