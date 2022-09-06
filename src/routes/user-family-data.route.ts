@@ -5,7 +5,7 @@ const router = Router();
 const userFamilyDataController = new UserFamilyDataController();
 router.get("/", userFamilyDataController.getFamilyData);
 router.post("/", userFamilyDataController.createFamilyData);
-router.put("/:id", userFamilyDataController.updateFamilyData);
-router.delete("/:id", userFamilyDataController.deleteFamilyData);
+router.put("/", userFamilyDataController.updateFamilyData);
+router.delete("/", userFamilyDataController.deleteFamilyData);
 
 export default router;

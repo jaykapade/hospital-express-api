@@ -56,8 +56,12 @@ export class UserDetailsService {
   }
   @Delete("{id}")
   public async deleteUserDetails(user) {
-    const { id }: any = await this.getUserDetails(user);
-    let data = await UserDataEntity.delete(id);
-    return data;
+    try {
+      const { id }: any = await this.getUserDetails(user);
+      let data = await UserDataEntity.delete(id);
+      return data;
+    } catch (error) {
+      return error;
+    }
   }
 }

@@ -10,7 +10,11 @@ const routes = Router();
 
 routes.use("/auth", userAuth);
 routes.use("/user", passport.authenticate("jwt", { session: false }), userData);
-routes.use("/family", userFamilyData);
+routes.use(
+  "/family",
+  passport.authenticate("jwt", { session: false }),
+  userFamilyData
+);
 
 routes.get(
   "/protected",
