@@ -57,22 +57,26 @@ export class UserDataController {
       res.json(err);
     }
   };
-  public updateUserDetails = async (req: Request, res: Response) => {
-    const { id } = req.params;
+  public updateUserDetails = async (
+    req: GetUserAuthInfoRequest,
+    res: Response
+  ) => {
+    const { user, body } = req;
     try {
-      let data = await this.userDetailsService.updateUserDetails(
-        req.body,
-        parseInt(id)
-      );
+      let data = await this.userDetailsService.updateUserDetails(body, user);
+      console.log("🚀 ~ body, user", body, user);
       res.json(data);
     } catch (err) {
       res.json(err);
     }
   };
-  public deleteUserDetails = async (req: Request, res: Response) => {
-    const { id } = req.params;
+  public deleteUserDetails = async (
+    req: GetUserAuthInfoRequest,
+    res: Response
+  ) => {
+    const { user } = req;
     try {
-      let data = await this.userDetailsService.deleteUserDetails(parseInt(id));
+      let data = await this.userDetailsService.deleteUserDetails(user);
       res.json(data);
     } catch (err) {
       res.json(err);

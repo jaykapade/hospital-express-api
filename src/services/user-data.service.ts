@@ -44,7 +44,8 @@ export class UserDetailsService {
     }
   }
   @Put()
-  public async updateUserDetails(@Body() userData, @Path() id) {
+  public async updateUserDetails(userData, user) {
+    const { id }: any = await this.getUserDetails(user);
     let data = await AppDataSource.createQueryBuilder()
       .update(UserDataEntity)
       .set(userData)
@@ -54,7 +55,8 @@ export class UserDetailsService {
     return data;
   }
   @Delete("{id}")
-  public async deleteUserDetails(@Path() id) {
+  public async deleteUserDetails(user) {
+    const { id }: any = await this.getUserDetails(user);
     let data = await UserDataEntity.delete(id);
     return data;
   }

@@ -6,7 +6,7 @@ const userDataController = new UserDataController();
 
 router.get("/", userDataController.getUserDetails);
 router.post("/", userDataController.createUserDetails);
-router.put("/:id", userDataController.updateUserDetails);
-router.delete("/:id", userDataController.deleteUserDetails);
+router.put("/", userDataController.updateUserDetails);
+router.delete("/", userDataController.deleteUserDetails);
 
 export default router;
